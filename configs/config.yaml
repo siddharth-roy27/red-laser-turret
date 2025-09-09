@@ -1,11 +1,9 @@
-# --- Camera ---
 camera:
   use_picamera2: true
   resolution: [640, 480]
   framerate: 30
-  headless: false   # set true if no display; window disabled
+  headless: false
 
-# --- Detection ---
 detection:
   mode: "red_dot"       # red_dot | aruco
   red_hsv_lower1: [0, 120, 120]
@@ -14,33 +12,28 @@ detection:
   red_hsv_upper2: [179, 255, 255]
   min_radius_px: 2
   aruco_dict: "DICT_4X4_50"
-  aruco_marker_size_cm: 5.0  # known printed marker edge size for distance
+  aruco_marker_size_cm: 5.0
 
-# --- Servos & Button ---
 hardware:
-  servo_x_pin: 17     # pan
-  servo_y_pin: 27     # tilt
-  button_pin: 22      # pull-up, press=LOW
-  # PWM pulse widths for 0°..180° (tune per your servos)
+  servo_x_pin: 17
+  servo_y_pin: 27
+  button_pin: 22
   pulse_min_us: 500
   pulse_max_us: 2500
   pwm_hz: 50
 
 control:
   center_tolerance_px: 18
-  # simple P control on image error → angle deg
   kp_deg_per_px_x: 0.06
   kp_deg_per_px_y: 0.06
   limit_deg_min: 10
   limit_deg_max: 170
-  # slew limit (deg per update) to smooth motion
   max_step_deg: 2.5
 
-# --- "Ballistic" demo (safe visual offset ONLY) ---
 ballistic_demo:
   enabled: true
-  gravity_demo_gain: 0.0009   # pixel offset = gain * distance_cm^2
-  max_offset_px: 80           # clamp visual offset
+  gravity_demo_gain: 0.0009
+  max_offset_px: 80
 
 logging:
   file: "data/logs/tracker.log"
